@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'HelloWord',
+  name: 'ThirdComponent',
   props: {
     message: String
   }
@@ -16,6 +16,6 @@ export default {
 <!--"scoped": Chỉ có tác dụng trong file.vue này -->
 <style scoped>
  h1 {
-   color: red;
+   color: green;
  }
 </style>

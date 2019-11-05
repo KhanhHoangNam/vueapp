@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'HelloWord',
+  name: 'SecondComponent',
   props: {
     message: String
   }
