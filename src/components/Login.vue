@@ -4,9 +4,9 @@
       <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
         <h5 class="text-center">Login to your account</h5>
         <div class="form-group">
-          <input type="text" id="inputEmail"
-                 v-model="email"
+          <input type="text" id="inputEmail"                 
                  name="email"
+                 v-model="email"
                  v-validate="'required|email'"
                  :class="{'form-control':true,
                           'border-danger': errors.has('email')}"
@@ -18,11 +18,17 @@
         </div>
 
         <div class="form-group">
-          <input type="password"                 
+          <input type="password"                                  
                  name="password"
-                 class="form-control"
+                 v-model="password"
+                 v-validate="'required'"
+                 :class="{'form-control':true,
+                          'border-danger': errors.has('password')}"
                  placeholder="Password"
                  >
+          <span v-show="errors.has('password')" class="text-danger">
+            {{errors.first('password')}}
+          </span>                 
         </div>
         <!-- checkbox ? -->
         <div class="custom-control custom-checkbox mb-3">
@@ -44,15 +50,21 @@
             @click="loginFacebook">
             <i class="fab fa-facebook-f mr-2"></i>
             Sign in with facebook
-        </button>         
+        </button> 
+        <h5 class="text-center mx-auto mt-1">OR</h5>
+        <Register></Register>        
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import Register from './Register.vue'
 export default {
   name: 'Login',
+  components: {
+    Register
+  },
   props: {
     
   },
@@ -64,14 +76,26 @@ export default {
   },
   methods: {
     async login() {
-      alert('Bạn bấm đăng nhập')
+      let result = await this.$validator.validateAll()
+      if(!result) {
+        return
+      }
+      alert(`Bạn bấm đăng nhập. Email: ${this.email}, password: ${this.password}`)
     },
 
     async loginFacebook() {
+      let result = await this.$validator.validateAll()
+      if(!result) {
+        return
+      }
       alert('Bạn bấm đăng nhập Facebook')
     },
 
     async loginGoogle() {
+      let result = await this.$validator.validateAll()
+      if(!result) {
+        return
+      }
       alert('Bạn bấm đăng nhập Google')
     }
   }
