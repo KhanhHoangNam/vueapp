@@ -58,12 +58,22 @@
         <button type="button" class="btn btn-lg btn-success btn-block text-uppercase"
                   @click="createAccount">
                   Create account
-         </button>          
+        </button>   
+        <span v-if="registerResponse.result === false"
+              class="text-danger">
+            {{registerResponse.message}}
+        </span>  
+        <span v-else
+              class="text-success">
+            {{registerResponse.message}}  
+        </span>     
     </div>
     
 </template>
 
 <script>
+import {registerUser} from '../APIs/usersAPI'
+import {APIResponse} from '../APIs/apiParameters.js'
 export default {
     name: 'Register',
     props: {},
@@ -73,6 +83,7 @@ export default {
             email: "",
             password: "",
             retypePassword: "",
+            registerResponse: new APIResponse()
         }
     },
     methods: {
@@ -81,7 +92,7 @@ export default {
             if(!reseult) {
                 return
             }
-            alert(`Gửi thông tin API tới Nodejs Server`)
+            this.registerResponse = await registerUser(this.fullName, this.email, this.password)
         }
     }
 }

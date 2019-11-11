@@ -24,12 +24,5 @@ export default {
 </script>
 
 <style scoped>
-.btn-google {
-  color: white;
-  background-color: #ea4335;
-}
-.btn-facebook {
-  color: white;
-  background-color: #3b5998;
-}
+
 </style>
