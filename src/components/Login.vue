@@ -60,6 +60,7 @@
 
 <script>
 import Register from './Register.vue'
+import {loginUser} from '@/APIs/usersAPI.js'
 export default {
   name: 'Login',
   components: {
@@ -80,7 +81,14 @@ export default {
       if(!result) {
         return
       }
-      alert(`Bạn bấm đăng nhập. Email: ${this.email}, password: ${this.password}`)
+      let loggedInUser = await loginUser(this.email, this.password)
+      if(Object.keys(loggedInUser).length > 3) {
+        this.$session.start()
+        this.$session.set('loggedInUser', loggedInUser)
+        this.$router.push('/')
+      } else {
+        alert('Đăng nhập không thành công, kiểm tra lại email/password')
+      }
     },
 
     async loginFacebook() {
