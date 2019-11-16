@@ -44,7 +44,7 @@ export const loginUser = async (email, password) => {
             },
         })
         let responseJson = await response.json()
-        if(registerUser.result === "success") {
+        if(responseJson.result === "success") {
             return responseJson.data
         } else {
             return {}

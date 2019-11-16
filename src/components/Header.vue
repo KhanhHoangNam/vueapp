@@ -37,6 +37,19 @@ export default {
             isLoggedIn: false
         }
     },
+    created() {
+        if(this.$session.exists()) {
+            let userObejct = this.$session.get('loggedInUser')
+            window.console.log(userObejct)
+            this.userName = userObejct.name ? userObejct.name : ''
+            this.profileUrl = userObejct.profileUrl ? userObejct.profileUrl : ''
+            this.isLoggedIn = true
+        } else {
+            this.userName = ''
+            this.profileUrl = ''
+            this.isLoggedIn = false
+        }
+    },
     methods: {
         clickToLogin() {
             this.$emit('clickToLogIn')

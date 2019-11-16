@@ -60,7 +60,7 @@
 
 <script>
 import Register from './Register.vue'
-import {loginUser} from '@/APIs/usersAPI.js'
+import {loginUser} from '../APIs/usersAPI'
 export default {
   name: 'Login',
   components: {
@@ -72,7 +72,8 @@ export default {
 
   data() {
     return {
-
+      email:'',
+      password:''
     }
   },
   methods: {
@@ -81,8 +82,8 @@ export default {
       if(!result) {
         return
       }
-      let loggedInUser = await loginUser(this.email, this.password)
-      if(Object.keys(loggedInUser).length > 3) {
+      let loggedInUser = await loginUser(this.email, this.password)            
+      if(Object.keys(loggedInUser).length > 0) {
         this.$session.start()
         this.$session.set('loggedInUser', loggedInUser)
         this.$router.push('/')
